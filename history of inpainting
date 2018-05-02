@@ -1,3 +1,8 @@
+2009
+ patch-based image synthesis Barnes et al 
+ -(Barabi et al 2012,  huang et al. 2014, simakov et al. 2008, wexler et al. 2007)
+ - it remains a chllenging problem because if often requires high-level recognition of scens.
+
 2014
 Adam : A method for stochastic optimization [CoRR]
 -Adamoptimizer
