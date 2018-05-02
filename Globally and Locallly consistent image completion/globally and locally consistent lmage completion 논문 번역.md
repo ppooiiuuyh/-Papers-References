@@ -46,7 +46,14 @@ Discriminator가 Generator보다 먼저 update 됩니다.
 * results of applying out approach to specific datasets for more challenging image completion
 
 ## 2. RELATED WORK
-다양한 다른 기법들이 image completion task를 위해 제안되어왔다. 더 전통적인 기법들 중 하나는 diffusion-based image synthesis 이다.
+다양한 다른 기법들이 image completion task를 위해 제안되어왔다. 더 전통적인 기법들 중 하나는 diffusion-based image synthesis 이다. 이 기법은 target holes 주위의 local appearance를 그들을 메우는 방향으로 전파시킨다.
+~~~
+diffusion based image synthesis
+비어있는 부분 주변에서 비어있는부분쪽으로 확산시켜가며 메우는 기법인것 같습니다.
+![](https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/Globally%20and%20Locallly%20consistent%20image%20completion/asset/diffusion.jpeg)
+(예시 그림)
+~~~
+
 
 ## Translator
 Dohyun Kim
