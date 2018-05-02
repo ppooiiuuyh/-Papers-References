@@ -1,0 +1,12 @@
+1. receptive field sizes, which dictate dependency between distant regions, have a critical effect on texture generation.
+if the amount of sub-sampling is reaised to increase the receptive field, the up-sampling part of the generator network will be faced with a more difficult problem that typically leads to low quality or blurry ouputs.
+
+2. dilated convoltuion operatio is utilized in order to increase the receptive field size without applying xub-sampling or adding excessive amount of convolution layers.
+
+3. interpolated convolution is proposed by Odena et al. to oversom the well-known checkerboad artifacts during the up-sampling operation caused by the transposed convolution
+
+4. rather than training twe separate net works simultaneously, we design a weight sharing architecture at the first few layers so that they learn common low level visual features. After a certain layer, they are split into two pathways.
+
+5.use a combination of three loss functions, and using Adam optimizer
+
+6. in this study, we prefer interpolated convolution rather than transposed convolution because it provides smooth outputs.

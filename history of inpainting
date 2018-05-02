@@ -1,0 +1,47 @@
+2014
+Adam : A method for stochastic optimization [CoRR]
+-Adamoptimizer
+
+2015
+Multi-scale context aggregatino by dilated convolutions [CoRR]
+-dilated convolutions
+
+2016
+Context encoders: feature learning by inpainting CVPR 2016
+-context-encoder
+-applied addversarial training	
+- although the CE had shown promising results, inadequate representation gereneration skill of an auto encoder network in the CE led to substantial amount of impluasible results as well
+
+
+High-resolution inmage inpainting using multi-scale neural patch synthesis
+-ce-like network is trained with an adversarial and a euclidean loss to obtain the global structure of the input, then the style transfer method used
+
+Combining markov random fields and convolutional neural networks for image synthesis CVPR
+
+perceptural losses for real-time style transfer and super-resolution (springer international publishing cam, 604`711)
+-the generative resnet that we(PGGAN authors) compose consists of down-sampling, resifual blocks and up-sampling parts using the architectural guidedlines introduces in this book
+
+
+deconvolution and ceckerboard artifacts 
+-using interpolated convolution to overcome the well-known checkerboard artifacts during the up-sampling operation caused by the transposed convolution.
+
+
+High-resolution image inpainting using multi-scale neural patch synthesis
+-NPS approach take several second due to theur local texture constraint
+
+
+2017
+Semantic image inpainting with deep generative models.  CVPR
+- importance-weighted context loss that considers closeness to the corrupted region is utilized
+
+Generative face completion CVPR
+Globally and Locally Consistent Image completion  [ACM transactions on Graphics]
+-add a new discriminator network that considers only the filled region to emphasize the adversarial loss on top of the global GAN discriminator (G-GAN)
+-although those works have shown prominent results for the large hole filling problem, their main drawback is the LGAN's smphasis on conditioning to the location of the mask.
+-( sloved by applying post-processing methods to the systhesized image)
+-LGAN pyches the generative network to produce independent textures that are incompatible with the whole image semantics.
+-(this problem is solved by adding an extension network that corrects the imperfections)
+
+Globally and Locally Consistent Image Completion [ACM Transactions on Graphis] again
+- first using dilate convolution for image inpainting
+
