@@ -36,4 +36,13 @@ Completion network는 fully convolutional하고 이미지를 완성시키기 위
 Discriminator가 Generator보다 먼저 update 됩니다.
 ~~~
 
-그 다음에, completion network가 disciminator network들이 구분 못할정도로 정교하게 비어있는 부분을 채울 수 있도록 업데이트된다. Fig.1에 보이는바와 같이, local, global context discriminator들을 함께 사용하는것은 진짜같은 이미지를 완성하는것에 중요하게 작요안다.
+그 다음에, completion network가 disciminator network들이 구분 못할정도로 정교하게 비어있는 부분을 채울 수 있도록 업데이트된다. Fig.1에 보이는바와 같이, local, global context discriminator들을 함께 사용하는것은 진짜같은 이미지를 완성하는것에 중요하게 작용한다.
+![](https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/Globally%20and%20Locallly%20consistent%20image%20completion/asset/fig1.png)
+
+우리는 우리의 기법과 기존의 다른 기법들을 다양한 이미지를통해 비교분석 하였다. 우리는 또한 얼굴완성과 같은 더욱 도전적인 분야에 대한 결과도 나타내었는데, 우리의 기법은 눈, 코 , 입과 같은 단편적인 이미지들을 현실감있게 생성해 낼 수 있었다. 우리는 이 도전적인 얼굴완성분야에 대한 자연스러움(naturalness)의 정도를 user study를 통하여 평가하였는데, 실제얼굴과 우리의 결과의 차이를 77%나 분간하지 못하였다.
+요약하자면, 이 논문에서 우리는 다음을 나타낸다.
+* a high performance network model that can complete arbutrary missing regions
+* a globally and locally consistent adversarial training approach for image completion, and
+* results of applying out approach to specific datasets for more challenging image completion
+
+## 2. RELATED WORK
