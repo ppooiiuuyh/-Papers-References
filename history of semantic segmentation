@@ -1,0 +1,19 @@
+2014 
+Learning rich features from rgb-d images for object detection and segmentation
+-in [11,29,21], depth information forms three channels via hha encoding : horizontal disparitym height above gound and norm anfle.
+
+
+2015
+Fully convolutional networks for semantic segmentation
+ - Fully convolutional networks (FCN) have demonstrated effectiveness in performing semantic segmentation.
+ 
+Semantic image segmentation with deep convolutional neural networks on graphs with fast localized spectral filtering
+ - Chen used dilated convolutions to enlarge the -receptive field of the network while retaining dense prediction.
+- conditional random fiels (CRFs) have been applied as post-porcessing or have been intergrated into the network to refine boundary of prediction
+
+Predicting depth surface normals and semantic labels with a common multi-scale convolutional architecture
+- in [7] the depth image is simply treated as a noe-channel image.
+- Eigen et al. proposed a global-to-local strategy to combine different levels of prediction, which simply extracted feature is again concatenated with the image one for prediction. 
+
+2016
+semantic object parsing with local-global long shor-term memory
