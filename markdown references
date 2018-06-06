@@ -1,0 +1,20 @@
+이미지 가운데 정렬, 크기 조정 (html 태그 사용)
+<p style="text-align: center;">
+
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/domain%20adaptive%20faster%20r-cnn%20for%20object%20detection%20in%20the%20wild/fig1.png" width="300">
+
+</p>
+
+
+
+url 사용
+[http://theonly1.tistory.com/301](http://theonly1.tistory.com/301) 
+
+
+수학 기호 사용 
+$$$  \mathcal{H} $$$  (inline)
+$$
+$$  (block)
+
+ref : latex math symbols (http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html)
+
