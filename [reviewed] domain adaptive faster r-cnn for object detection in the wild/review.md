@@ -50,7 +50,7 @@ Object Detection은 CNN의 발전에 힘입어 상당한 성능향상을 보여�
 ![$$$ \mathcal{H}-divergence$$$](http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BH%7D-divergence)에 관한 설명입니다. 이는 간단히 말해서 두 domain간의 divergence를 수치적으로 나타내기 위한 방법입니다. 여기서 domain이란 sample 이라고 생각하면 될것같습니다. 더 직관적으로 각 데이터셋을 의미한다고 생각할 수 있습니다. feature vector를 ![$$$x$$$](https://latex.codecogs.com/gif.latex?%5Cinline%20x) 라고 표현한다면 source domain의 feature vector를 ![$$$x_{s}$$$](https://latex.codecogs.com/gif.latex?%5Cinline%20x_%7Bs%7D), target domain의 것을 ![$$$x_{t}$$$](https://latex.codecogs.com/gif.latex?%5Cinline%20x_%7Bt%7D)으로 표현 할 수 있습니다. 그리고 여기에 추가로 x가 ![$$$x_{s}$$$](https://latex.codecogs.com/gif.latex?%5Cinline%20x_%7Bs%7D) 에 속하는지 ![$$$x_{t}$$$](https://latex.codecogs.com/gif.latex?%5Cinline%20x_%7Bt%7D)에 속하는지를 판별하는 분류기 ![$$$h$$$](https://latex.codecogs.com/gif.latex?%5Cinline%20h) 가 있고 ![$$$h:x \rightarrow \{0,1\}$$$](https://latex.codecogs.com/gif.latex?%5Cinline%20h%3Ax%20%5Crightarrow%20%5C%7B0%2C1%5C%7D) 로 표현합니다. 이제 ![$$$\mathcal{H}-divergence$$$](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BH%7D-divergence) 는 아래와 같이 표현됩니다.
 
 <p align="center">
-![](https://latex.codecogs.com/gif.latex?%5Cinline%20d_%7B%5Cmathcal%7BH%7D%7D%28%5Cmathcal%7BS%2CT%7D%29%20%3D%202%28%201%20-%20%7Bmin%7D_%7Bh%5Cin%5Cmathcal%7BH%7D%7D%20%28%7Berr%7D_%7BS%7D%28h%28x%29%20&plus;%20%7Berr%7D_%7BT%7D%28h%28x%29%29%29%29)
+<img src="https://latex.codecogs.com/gif.latex?%5Cinline%20d_%7B%5Cmathcal%7BH%7D%7D%28%5Cmathcal%7BS%2CT%7D%29%20%3D%202%28%201%20-%20%7Bmin%7D_%7Bh%5Cin%5Cmathcal%7BH%7D%7D%20%28%7Berr%7D_%7BS%7D%28h%28x%29%20&plus;%20%7Berr%7D_%7BT%7D%28h%28x%29%29%29%29">
 </p>
 
 보면 h가 ![$$$x_{s}$$$](https://latex.codecogs.com/gif.latex?%5Cinline%20x_%7Bs%7D)를 오인할 확률과  ![$$$x_{t}$$$](https://latex.codecogs.com/gif.latex?%5Cinline%20x_%7Bt%7D)를 오인할 확률을 더한값을 1에서 빼고 2를 곱한것입니다. 이때 두 도메인 샘을에 대한 분류기 h들의 집합 ![\mathcal{H}](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BH%7D) 에 속해있는 모든 h들에 대한 에러율 중 가장 작은 값만을 사용합니다. 여기서 나타나는 특징은 ![d_{\mathcal{H}}(\mathcal{S,T})](https://latex.codecogs.com/gif.latex?%5Cinline%20d_%7B%5Cmathcal%7BH%7D%7D%28%5Cmathcal%7BS%2CT%7D%29)와 ![\mathcal{H}](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BH%7D)은 서로 반비례관계에 있다는것입니다.
@@ -80,7 +80,7 @@ Object Detection은 CNN의 발전에 힘입어 상당한 성능향상을 보여�
 이 절에서는 본격적으로 **Image-Level Adaptation** 과 **Insnace-Level Apatation**에 관하여 설명합니다. 간단히 정리하자면 image-level이라는건 roi로 뽑지않은 이미지 채로 어떤 sample 도메인에 속하는지를 분류하는것이라면 instance-level은 roi로 뽑은 영역들에 대하여 수행하는것입니다. domain discriminator 입장에서 보면 detection이 아니기 때문에 영역이 크게 중요하지는 않지요. 그러나 우리의 최종 목표가 domain invariant한 detector를 만드는것이기 때문에 이왕할거 instance-level도 고려하자 는것입니다. 그러나 이때 주목할 점은 본 논문에서 저자들은 image-level의 adaptation을 수행할 때 이미지 통채로 쓰지않고 patch 단위로 분류를 수행하였다는 점입니다. 이는 Fig.2의 (B)의 아래쪽 흐름의 새로운 conv 모듈을 통해 확인할 수 있습니다. 이를 통해 global한 변화에 덜 휩쓸리며 수행할때 input으로 사용되는 이미지의 resolution을 낮출 수 있기 때문에 한번에 여러개의 minibatch들을 사용할 수 있다는 것을 장점으로 언급하고 있습니다. 이 부분은 식으로 확인하는것이 더 간단할것같습니다. 우선 image-level domain adaptation loss입니다.
 
 <p align="center">
-![e](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D_%7Bimg%7D%20%3D%20-%20%5Cunderset%7Bi%2Cu%2Cv%7D%7B%5CSigma%7D%5Cleft%5B%20%5Cmathcal%7BD%7D_%7Bi%7D%5Clog%20p_%7Bi%7D%5E%7B%28u%2Cv%29%7D%20&plus;%20%281-%5Cmathcal%7BD%7D_%7Bi%7D%29%5Clog%20%5Cleft%281-p_%7Bi%7D%5E%7B%28u%2Cv%29%7D%5Cright%29%20%5Cright%5D)
+<img src="https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D_%7Bimg%7D%20%3D%20-%20%5Cunderset%7Bi%2Cu%2Cv%7D%7B%5CSigma%7D%5Cleft%5B%20%5Cmathcal%7BD%7D_%7Bi%7D%5Clog%20p_%7Bi%7D%5E%7B%28u%2Cv%29%7D%20&plus;%20%281-%5Cmathcal%7BD%7D_%7Bi%7D%29%5Clog%20%5Cleft%281-p_%7Bi%7D%5E%7B%28u%2Cv%29%7D%5Cright%29%20%5Cright%5D">
 </p>
 
 <!--
@@ -101,7 +101,7 @@ $$
 -->
 
 <p align="center">
-![](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D_%7Bins%7D%20%3D%20-%20%5Cunderset%7Bi%2Cj%7D%7B%5CSigma%7D%5Cleft%5B%20%5Cmathcal%7BD%7D_%7Bi%7D%5Clog%20p_%7Bi%2Cj%7D%20&plus;%20%281-%5Cmathcal%7BD%7D_%7Bi%7D%29%5Clog%20%5Cleft%281-p_%7Bi%2Cj%7D%5Cright%29%20%5Cright%5D)
+<img src="https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D_%7Bins%7D%20%3D%20-%20%5Cunderset%7Bi%2Cj%7D%7B%5CSigma%7D%5Cleft%5B%20%5Cmathcal%7BD%7D_%7Bi%7D%5Clog%20p_%7Bi%2Cj%7D%20&plus;%20%281-%5Cmathcal%7BD%7D_%7Bi%7D%29%5Clog%20%5Cleft%281-p_%7Bi%2Cj%7D%5Cright%29%20%5Cright%5D">
 </p>
 
 instance-level에서는 이미지 i의 region proposal들 마다 수행하게 됩니다. 그것 외에는 image-level과 동일합니다.
@@ -113,7 +113,7 @@ $$\mathcal{L} = \mathcal{L}_{det} + \lambda\left( \mathcal{L}_{img}+\mathcal{L}_
 -->
 
 <p align="center">
-![](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D%20%3D%20%5Cmathcal%7BL%7D_%7Bdet%7D%20&plus;%20%5Clambda%5Cleft%28%20%5Cmathcal%7BL%7D_%7Bimg%7D&plus;%5Cmathcal%7BL%7D_%7Bins%7D%20%5Cright%29)
+<img src="https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D%20%3D%20%5Cmathcal%7BL%7D_%7Bdet%7D%20&plus;%20%5Clambda%5Cleft%28%20%5Cmathcal%7BL%7D_%7Bimg%7D&plus;%5Cmathcal%7BL%7D_%7Bins%7D%20%5Cright%29">
 </p>
 
 가 됩니다. (![\mathcal{L}_{det}](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D_%7Bdet%7D) 은 detector의 loss 입니다). ![\lambda](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Clambda)는 양측의 loss의 밸런스를 맞춰주기위한 상수입니다. 여기서 생각해볼만한 점은 image-level의 의 patch수와 instance-level의 proposal들의 수가 다른만큼 너무 차이나면 한쪽만 의미를 가질수도 있기에 여기도 보정을 해주는것이 좋지 않나 싶은데 딱히 그러지는 않은것 같습니다. 아마 수가 크게 차이나지는 않도록 해서이지 않을까 싶습니다.
@@ -129,13 +129,13 @@ $$
 -->
 
 <p align="center">
-![](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D_%7Bcst%7D%20%3D%20%5Cunderset%7Bi%2Cj%7D%7B%5CSigma%7D%7C%7C%20%5Cfrac%7B1%7D%7B%7CI%7C%7D%20%5Cunderset%7Bu%2Cv%7D%7B%5CSigma%7D%7B%28p_i%5E%7B%28u%2Cv%29%7D%20-%20p_%7Bi%2Cj%7D%29%7D%7C%7C_2)
+<img src="https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D_%7Bcst%7D%20%3D%20%5Cunderset%7Bi%2Cj%7D%7B%5CSigma%7D%7C%7C%20%5Cfrac%7B1%7D%7B%7CI%7C%7D%20%5Cunderset%7Bu%2Cv%7D%7B%5CSigma%7D%7B%28p_i%5E%7B%28u%2Cv%29%7D%20-%20p_%7Bi%2Cj%7D%29%7D%7C%7C_2">
 </p>
 
 최종적으로는
 
 <p align="center">
-![](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D%20%3D%20%5Cmathcal%7BL%7D_%7Bdet%7D%20&plus;%20%5Clambda%5Cleft%28%20%5Cmathcal%7BL%7D_%7Bimg%7D&plus;%5Cmathcal%7BL%7D_%7Bins%7D%20&plus;%5Cmathcal%7BL%7D_%7Bcst%7D%20%5Cright%29)
+<img src="https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BL%7D%20%3D%20%5Cmathcal%7BL%7D_%7Bdet%7D%20&plus;%20%5Clambda%5Cleft%28%20%5Cmathcal%7BL%7D_%7Bimg%7D&plus;%5Cmathcal%7BL%7D_%7Bins%7D%20&plus;%5Cmathcal%7BL%7D_%7Bcst%7D%20%5Cright%29">
 </p>
 
 <!--
