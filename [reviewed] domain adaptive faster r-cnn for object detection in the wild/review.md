@@ -7,7 +7,6 @@
 **Paper Info** : Yuhua Chen, Wen Li, Chistos Sakaridis, Dengxin Dai, Luc Van Gool (CVPR 2018)
 
 **References**
-
 - [http://jaejunyoo.blogspot.com/2017/01/domain-adversarial-training-of-neural.html](http://jaejunyoo.blogspot.com/2017/01/domain-adversarial-training-of-neural.html) : DANN 에 대하여 잘 설명해주신 사이트입니다.
 - [http://theonly1.tistory.com/301](http://theonly1.tistory.com/301) : 마찬가지로 Domain adaptation 에 대하여 잘 설명해주신 사이트입니다.
 - [https://arxiv.org/abs/1505.07818](url) : Domain-adverarial training of neural networks 논문입니다.
@@ -25,7 +24,7 @@ Object detection은 일반적으로 training과 test data들이 identical distri
 Object Detection은 CNN의 발전에 힘입어 상당한 성능향상을 보여왔습니다. 하지만 여전히 training과 test데이터셋 사이에 상당항 domain shift를 일으킬수있는 view-points, object appearance, backgrounds, illumination, image quality, 등등 에서의 큰 변화에도 강경할 수 있는지는 도전적인 문제로 남아있습니다. 논문에서 사용한 예시와 같이 자율주행 차량의 경우를 생각해본다면, 학습할때 사용했던 이미지를 찍었을때의 카메라 상태와 주변 환경(날씨 등)은 실제로 주행할때의 상태와는 다를것입니다. 이러한 경우 'domain shift'가 발생하며 detection 성능을 저하 시킬 것입니다. Fig1을 통하여 실제로 각 데이터셋 별로 환경의 차이를 확인할 수 있습니다.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/domain%20adaptive%20faster%20r-cnn%20for%20object%20detection%20in%20the%20wild/fig1.png" width="300">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/%5Breviewed%5D%20domain%20adaptive%20faster%20r-cnn%20for%20object%20detection%20in%20the%20wild/fig1.png" width="300">
 </p>
 
 더 많고 다양한 환경을 가정하는 학습 데이터를 모으는것은 이러한 domain shift문제를 해결 할 수 있는 방법일 수 있지만 이는 굉자히 비용이 많이드는 작업입니다. 따라서 이러한 문제를 알고리즘수준으로 해결하기 위한것이 이 논문 및 domain adaptation분야의 핵심 목표입니다. 다시 정리하자면 Train set과 Test set간의 domain shift를 줄이는것이 목표입니다. 당연한 말이지만 이 논문에서 저자는 training 셋에 대하여는 지도학습을, target domain에 대하여는 지도학습이 불가능한(비지도학습을 하는) 시나리오에서의 domain adaptation을 고려하고 있습니다. 그렇기 때문에 어떠한 추가적인 annotation cost없이 문제를 완화할 수 있는 기법을 다루고자 하였습니다. 본 논문에서 저자는 기존의 Faster R-CNN object detection model을 기반으로 연구를 진행하였습니다. 따라서 이를 이해하기 위해서는 Faster R-CNN에 대하여 이해하는것이 좋습니다만 본 리뷰에서 다루지는 않을것입니다. 대신에 Faster R-CNN은 유명한 만큼 [[link](http://judelee19.github.io/machine_learning/faster_rcnn/)] 등의 많은 정리 글이 있으므로 이쪽을 추천드립니다!.
