@@ -3,11 +3,8 @@
 
 ## 들어가기 앞서
 **Paper URL**  : [https://arxiv.org/pdf/1803.03243.pdf](https://arxiv.org/pdf/1803.03243.pdf)
-
 **Paper Info** : Yuhua Chen, Wen Li, Chistos Sakaridis, Dengxin Dai, Luc Van Gool (CVPR 2018)
-
 **References**
-
 - [http://jaejunyoo.blogspot.com/2017/01/domain-adversarial-training-of-neural.html](http://jaejunyoo.blogspot.com/2017/01/domain-adversarial-training-of-neural.html) : DANN 에 대하여 잘 설명해주신 사이트입니다.
 - [http://theonly1.tistory.com/301](http://theonly1.tistory.com/301) : 마찬가지로 Domain adaptation 에 대하여 잘 설명해주신 사이트입니다.
 - [https://arxiv.org/abs/1505.07818](url) : Domain-adverarial training of neural networks 논문입니다.
