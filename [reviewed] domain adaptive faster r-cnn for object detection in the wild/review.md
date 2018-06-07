@@ -1,4 +1,4 @@
-# Domain Adaprive Faster R-CNN for Object Detection in the Wild
+# [review] Domain Adaprive Faster R-CNN for Object Detection in the Wild
 
 
 ## 들어가기 앞서
@@ -62,7 +62,7 @@ Object Detection은 CNN의 발전에 힘입어 상당한 성능향상을 보여�
 -->
 
 <p align="center">
-![](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cunderset%7Bf%7D%7Bmin%7D%5Cspace%20d_%7B%5Cmathcal%7BH%7D%7D%28%5Cmathcal%7BS%2CT%7D%29%20%5Cleftrightarrow%20%5Cunderset%7Bf%7D%7B%5Cmax%7D%5Cunderset%7Bh%5Cin%5Cmathcal%7BH%7D%7D%7B%5Cmin%7D%5C%7B%7Berr%7D_%7BS%7D%28h%28x%29%29%20&plus;%20%7Berr%7D_%7BT%7D%28h%28x%29%29%5C%7D)
+<img src ="https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cunderset%7Bf%7D%7Bmin%7D%5Cspace%20d_%7B%5Cmathcal%7BH%7D%7D%28%5Cmathcal%7BS%2CT%7D%29%20%5Cleftrightarrow%20%5Cunderset%7Bf%7D%7B%5Cmax%7D%5Cunderset%7Bh%5Cin%5Cmathcal%7BH%7D%7D%7B%5Cmin%7D%5C%7B%7Berr%7D_%7BS%7D%28h%28x%29%29%20&plus;%20%7Berr%7D_%7BT%7D%28h%28x%29%29%5C%7D">
 </p>
 
 즉 에러의 합의 최소값을 가장 크게 하고 domain distance를 가장 작게하는 ![f](https://latex.codecogs.com/gif.latex?%5Cinline%20f)를 찾는것인데 이는 adversarial training 방식으로 풀수있는 식이 됩니다. 그리고 이를 위해 Ganin 과 Lempitsky가 [Unsupervised domain adaptation by backpropagation (ICML 2015)](http://proceedings.mlr.press/v37/ganin15.pdf) 에서 개발한 gradient reverse layer (GRL)을 사용합니다. (제 이해에는 GRL은 결국 그 이후의 에서의 역전파가 그 이전으로 진행되지 않게 하는것 뿐이라고 생각하고있습니다. 실제 구현도 아마도..) 이에 대하여는 [](http://jaejunyoo.blogspot.com/2017/01/domain-adversarial-training-of-neural-3.html) 이 블로그에 잘 정리되어있습니다 (감사합니다!). 최종적인 전체 구조는 아래 그림과 같습니다. (a)까지는 기존의 Faster R-CNN의 구조와 동일하겨 그 뒤로 본 논문에서 소개된 adversarial domain adaptation 모듈들이 추가되어있습니다. 뒤에 한번더 정리하겠지만 최종적인 loss 함수는 기존의 loss와 instance-level , image-level loss와 여기에 추가적으로 consistency regularization을 더합 값을 사용합니다.(각 모듈별 가중치가 붙기는 합니다)
