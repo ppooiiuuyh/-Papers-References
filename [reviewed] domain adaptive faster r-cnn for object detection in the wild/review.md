@@ -16,7 +16,7 @@ Object detection은 일반적으로 training과 test data들이 identical distri
 - the image-level shift : 이미지 스타일, illumination(광학요소), 등등
 - the instance-level shift : 물체의 외양, 크기 등등
 
-우리는 최근의 state-of-the-art 모델인 Faster R-CNN 을 기반으로 연구를 진행하였으며, domain discrepancy를 줄이기 위하여 image level과 instance level에서의 두가지로 domain adaptation component들을 설계하였다. 두 domain adaptation component들은 $$$ \mathcal{H}-divergence$$$ 이론에 기반하며, adversarial training 방식으로 domain classifier를 학습시키는것으로 구현되었다. 다른 level의 Domain classifier들은 consistency regularization에 의하여 더 강하게 Faster R-CNN의 region proposal network(RPN)을 학습하도록 강제될 수 있다. 우리는 우리가 제안한 새로운 접근법을 Cityscapes, KITTI, SIM10K, 등을 포함한 여러가지 데이터셋들을 사용하여 평가하였다. 결과는 우리가 제안한 기법이 다양한 domain shift 시나리오에도 강경하게 object detection을 수행할 수 있음을 보여주었다.
+우리는 최근의 state-of-the-art 모델인 Faster R-CNN 을 기반으로 연구를 진행하였으며, domain discrepancy를 줄이기 위하여 image level과 instance level에서의 두가지로 domain adaptation component들을 설계하였다. 두 domain adaptation component들은 ![](http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BH%7D-divergence) <!--$$$ \mathcal{H}-divergence$$$ --> 이론에 기반하며, adversarial training 방식으로 domain classifier를 학습시키는것으로 구현되었다. 다른 level의 Domain classifier들은 consistency regularization에 의하여 더 강하게 Faster R-CNN의 region proposal network(RPN)을 학습하도록 강제될 수 있다. 우리는 우리가 제안한 새로운 접근법을 Cityscapes, KITTI, SIM10K, 등을 포함한 여러가지 데이터셋들을 사용하여 평가하였다. 결과는 우리가 제안한 기법이 다양한 domain shift 시나리오에도 강경하게 object detection을 수행할 수 있음을 보여주었다.
 
 ## 1.Introduction
 Object Detection은 CNN의 발전에 힘입어 상당한 성능향상을 보여왔습니다. 하지만 여전히 training과 test데이터셋 사이에 상당항 domain shift를 일으킬수있는 view-points, object appearance, backgrounds, illumination, image quality, 등등 에서의 큰 변화에도 강경할 수 있는지는 도전적인 문제로 남아있습니다. 논문에서 사용한 예시와 같이 자율주행 차량의 경우를 생각해본다면, 학습할때 사용했던 이미지를 찍었을때의 카메라 상태와 주변 환경(날씨 등)은 실제로 주행할때의 상태와는 다를것입니다. 이러한 경우 'domain shift'가 발생하며 detection 성능을 저하 시킬 것입니다. Fig1을 통하여 실제로 각 데이터셋 별로 환경의 차이를 확인할 수 있습니다.
@@ -27,11 +27,11 @@ Object Detection은 CNN의 발전에 힘입어 상당한 성능향상을 보여�
 
 더 많고 다양한 환경을 가정하는 학습 데이터를 모으는것은 이러한 domain shift문제를 해결 할 수 있는 방법일 수 있지만 이는 굉자히 비용이 많이드는 작업입니다. 따라서 이러한 문제를 알고리즘수준으로 해결하기 위한것이 이 논문 및 domain adaptation분야의 핵심 목표입니다. 다시 정리하자면 Train set과 Test set간의 domain shift를 줄이는것이 목표입니다. 당연한 말이지만 이 논문에서 저자는 training 셋에 대하여는 지도학습을, target domain에 대하여는 지도학습이 불가능한(비지도학습을 하는) 시나리오에서의 domain adaptation을 고려하고 있습니다. 그렇기 때문에 어떠한 추가적인 annotation cost없이 문제를 완화할 수 있는 기법을 다루고자 하였습니다. 본 논문에서 저자는 기존의 Faster R-CNN object detection model을 기반으로 연구를 진행하였습니다. 따라서 이를 이해하기 위해서는 Faster R-CNN에 대하여 이해하는것이 좋습니다만 본 리뷰에서 다루지는 않을것입니다. 대신에 Faster R-CNN은 유명한 만큼 [[link](http://judelee19.github.io/machine_learning/faster_rcnn/)] 등의 많은 정리 글이 있으므로 이쪽을 추천드립니다!.
 
-다시 돌아와서, 저자는 domain shift문제를 해결하기 위해서 두 domain (training, target) 간의 $$$\mathcal{H}-divergence$$$를 줄이는 방법을 사용하였습니다. 이때 domain clssifier와 detector를 adversarial 하게 학습시키는데, 여기 까지는 [https://arxiv.org/abs/1505.07818](https://arxiv.org/abs/1505.07818) 이 논문과 같습니다. 본 논문의 핵심 contribution은
+다시 돌아와서, 저자는 domain shift문제를 해결하기 위해서 두 domain (training, target) 간의  ![](http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BH%7D-divergence) <!--$$$ \mathcal{H}-divergence$$$ --> 를 줄이는 방법을 사용하였습니다. 이때 domain clssifier와 detector를 adversarial 하게 학습시키는데, 여기 까지는 [https://arxiv.org/abs/1505.07818](https://arxiv.org/abs/1505.07818) 이 논문과 같습니다. 본 논문의 핵심 contribution은
 1. 확률론적 측면에서 cross-domain object detection문제를 이론적으로 분석하였으며
 2. image 수준, instance 수준에서 domain discrepancy를 완화시킬수 있는 두 domain daptation component들을 설계한것
 3. consistency regulatization을 사용하여  RPN을 더욱 domain invariant하게 만드는 방법을 제시한것
-4. 이 모든 방법들을 Faster R-CNN에 통합하여 end-to-end 방식으로 학습시킬 수 있도록 설계한 것 
+4. 이 모든 방법들을 Faster R-CNN에 통합하여 end-to-end 방식으로 학습시킬 수 있도록 설계한 것
 
 입니다. 개인적으로는 4번이 가장 큰 기여가 아닐까 생각합니다.
 
@@ -43,7 +43,7 @@ Object Detection은 CNN의 발전에 힘입어 상당한 성능향상을 보여�
 
 ## 3. Preliminaries
 #### 3.1 Faster R-CNN
-#### 3.2 Distribution Alignment with $$$\mathcal{H}-divergence$$$
+#### 3.2 Distribution Alignment with  ![](http://latex.codecogs.com/gif.latex?%5Cinline%20%5Cmathcal%7BH%7D-divergence) <!--$$$ \mathcal{H}-divergence$$$ -->
 $$$\mathcal{H}-divergence$$$에 관한 설명입니다. 이는 간단히 말해서 두 domain간의 divergence를 수치적으로 나타내기 위한 방법입니다. 여기서 domain이란 sample 이라고 생각하면 될것같습니다. 더 직관적으로 각 데이터셋을 의미한다고 생각할 수 있습니다. feature vector를 $$$x$$$ 라고 표현한다면 source domain의 feature vector를 $$$x_{s}$$$, target domain의 것을 $$$x_{t}$$$으로 표현 할 수 있습니다. 그리고 여기에 추가로 x가 $$$x_{s}$$$ 에 속하는지 $$$x_{t}$$$에 속하는지를 판별하는 분류기 $$$h$$$ 가 있고 $$$h:x \rightarrow \{0,1\}$$$ 로 표현합니다. 이제 $$$\mathcal{H}-divergence$$$ 는 아래와 같이 표현됩니다.
 
 $$d_{\mathcal{H}}(\mathcal{S,T}) = 2( 1 - {min}_{h\in\mathcal{H}} ({err}_{S}(h(x) + {err}_{T}(h(x))))
@@ -60,7 +60,8 @@ $$
 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/domain%20adaptive%20faster%20r-cnn%20for%20object%20detection%20in%20the%20wild/assets/fig2.png" width="1000">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/domain%20adaptive%20faster%20r-cnn%20for%20object%20detection%20in%20the%20wild/assets/fig2.png
+" width="1000">
 </p>
 
 
@@ -70,8 +71,18 @@ $$
 ##### 4.2.1 Image-Level Adapation & Instance-Level Adaptation
 이 절에서는 본격적으로 **Image-Level Adaptation** 과 **Insnace-Level Apatation**에 관하여 설명합니다. 간단히 정리하자면 image-level이라는건 roi로 뽑지않은 이미지 채로 어떤 sample 도메인에 속하는지를 분류하는것이라면 instance-level은 roi로 뽑은 영역들에 대하여 수행하는것입니다. domain discriminator 입장에서 보면 detection이 아니기 때문에 영역이 크게 중요하지는 않지요. 그러나 우리의 최종 목표가 domain invariant한 detector를 만드는것이기 때문에 이왕할거 instance-level도 고려하자 는것입니다. 그러나 이때 주목할 점은 본 논문에서 저자들은 image-level의 adaptation을 수행할 때 이미지 통채로 쓰지않고 patch 단위로 분류를 수행하였다는 점입니다. 이는 Fig.2의 (B)의 아래쪽 흐름의 새로운 conv 모듈을 통해 확인할 수 있습니다. 이를 통해 global한 변화에 덜 휩쓸리며 수행할때 input으로 사용되는 이미지의 resolution을 낮출 수 있기 때문에 한번에 여러개의 minibatch들을 사용할 수 있다는 것을 장점으로 언급하고 있습니다. 이 부분은 식으로 확인하는것이 더 간단할것같습니다. 우선 image-level domain adaptation loss입니다.
 
+
+
+<!--
+<p align="center">
+![e](http://latex.codecogs.com/gif.latex?%5Cmathcal%7BL%7D_%7Bimg%7D%20%3D%20-%20%5Cunderset%7Bi%2Cu%2Cv%7D%7B%5CSigma%7D%5Cleft%5B%20%5Cmathcal%7BD%7D_%7Bi%7D%5Clog%20p_%7Bi%7D%5E%7B%28u%2Cv%29%7D%20&plus;%20%281-%5Cmathcal%7BD%7D_%7Bi%7D%29%5Clog%20%5Cleft%281-p_%7Bi%7D%5E%7B%28u%2Cv%29%7D%5Cright%29%20%5Cright%5D)
+</p>
+-->
+
 $$ \mathcal{L}_{img} = - \underset{i,u,v}{\Sigma}\left[ \mathcal{D}_{i}\log p_{i}^{(u,v)} + (1-\mathcal{D}_{i})\log \left(1-p_{i}^{(u,v)}\right)  \right]
 $$
+
+
 
 보시면 그냥 sample i들에 대한 도메인 분류기 h의 sigmoid cross entrophy loss 함수입니다. $$$\mathcal{D}_{i}$$$는 해당 이미지가 어떤 도메인의 샘플인지에 대한 label이 됩니다. 무려 target domain은 detector를 학습시킬때는 지도학습 가능한 label이 없음에도불구하고 지금의 task에서는 어떤 도메인 출신인지 알수있기 때문에 이처럼 깔끔하게 학습 가능합니다. 또한 위에서 짚어본 바와 같이 image-level 에서는 patch단위로 학습을 수행하기 때문에 image i의 특정 좌표 u,v 별로(아마도 중심좌표) 수행하게 됩니다. 즉 이미지수 * patch 수 만큼 수행하게 됩니다.
 
