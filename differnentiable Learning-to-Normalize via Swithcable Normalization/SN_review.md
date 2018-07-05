@@ -123,9 +123,14 @@ w_k=\frac{e^{\lambda_k}}{\Sigma_{z\in\{in,ln,bn\}}e^{\lambda_z}},k\in\{in,ln,bn\
 ##3. Relations to Previous Work
 **Normaliztion** 아래의 표는 SN과 BNmIN,LN,GN그리고 세개의 BN의 변형기법인 Batch Renormaliztion (BRN), Batch Kalman Normalizatino(BKN), Weight Normalization (WN)을 비교한 것입니다. 그리고 표를 보시면 SN기법이 연산량면에서도 비슷하고 범용성을 훨신 좋다는것을 알 수 있습니다.
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/differnentiable%20Learning-to-Normalize%20via%20Swithcable%20Normalization/table1.png">
+</p>
+
+표가 워낙 잘 정리되어있어서 따로 정리할 것은 없지만 논문의 내용중에서 흥미로운 부분만 따로 정리하겠습니다. 대부분의 경우에는 p나 epslion같은 hyper-parameter(대부분의 경우에는 안정성을 위해 사용되며 고정된 값을 가짐)를 사용하지만 WN의 경우에는 그렇지 않습니다. 이는 다른 기법들에 비해서 WN는 feature space보다는 network parameter들의 space에 있기 때문이라고 합니다. 또한 SN같은 경우에는 더 풍부한 statistics를 가지고 있음에도 연산복잡도는 비슷하다는 점이있습니다. 그런데 저는 이 statistic가 풍부하다는게 정확히 어떤의미이고 어떤점에서 좋은건지 잘 모르겠습니다.
 
 
-## 5. Experiments
+## 4. Experiments
 저자분들께서 서론에서도 언급하신 바와 같이 본 논문에서는 정말 다양한 실험을 통하여 논문에서 제시한 기법의 효용성을 실험적으로 입증하였습니다. 하지만 이 부분은 딱히 의아한 부분도 없고 논문을 참고하는것이 더 좋을것 같아서 따로 정리하지는 않겠습니다.
 
 ## Author
