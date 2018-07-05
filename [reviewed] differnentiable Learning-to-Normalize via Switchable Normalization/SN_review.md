@@ -22,7 +22,7 @@
 Normalization기법들은 딥러닝분야, 특히 computer vision분야에서 매우 효과적으로 사용되고있습니다. 최근에는 batch normalization 이나 instance normalization, layer normalization과같은 기법들이 각각의 다른 네트워크구조들을 위해 개발되었고 좋은 결과를 보였습니다. 그런데 이런 성공에도 불구하고, 이를 이용한 기존 작업들은 수작업으로 이루어졌으며 대부분 모든 레이어에 걸쳐 같은 기법들을 적용하였습니다. 먼저 image classification 분야에 처음으로 적용되었던 batch normalization (BN) 부터 살펴보겠습니다. BN은 CNN의 hidden feature map들을 normalizing 하는 기법입니다. CNN의 feature map들은 Fig.1과 같이 minibatch size, num of channels, height and width of a channel들의 4차원 tensor (N,C,H,W)로 구성되어있습니다.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/differnentiable%20Learning-to-Normalize%20via%20Swithcable%20Normalization/fig1.png" width="400">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/%5Breviewed%5D%20differnentiable%20Learning-to-Normalize%20via%20Switchable%20Normalization/fig1.png" width="400">
 </p>
 
 몇가지 normalization 기법들을 살펴보면 다음과 같습니다.
@@ -124,7 +124,7 @@ w_k=\frac{e^{\lambda_k}}{\Sigma_{z\in\{in,ln,bn\}}e^{\lambda_z}},k\in\{in,ln,bn\
 **Normaliztion** 아래의 표는 SN과 BNmIN,LN,GN그리고 세개의 BN의 변형기법인 Batch Renormaliztion (BRN), Batch Kalman Normalizatino(BKN), Weight Normalization (WN)을 비교한 것입니다. 그리고 표를 보시면 SN기법이 연산량면에서도 비슷하고 범용성을 훨신 좋다는것을 알 수 있습니다.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/differnentiable%20Learning-to-Normalize%20via%20Swithcable%20Normalization/table1.png">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/%5Breviewed%5D%20differnentiable%20Learning-to-Normalize%20via%20Switchable%20Normalization/table1.png">
 </p>
 
 표가 워낙 잘 정리되어있어서 따로 정리할 것은 없지만 논문의 내용중에서 흥미로운 부분만 따로 정리하겠습니다. 대부분의 경우에는 p나 epslion같은 hyper-parameter(대부분의 경우에는 안정성을 위해 사용되며 고정된 값을 가짐)를 사용하지만 WN의 경우에는 그렇지 않습니다. 이는 다른 기법들에 비해서 WN는 feature space보다는 network parameter들의 space에 있기 때문이라고 합니다. 또한 SN같은 경우에는 더 풍부한 statistics를 가지고 있음에도 연산복잡도는 비슷하다는 점이있습니다. 그런데 저는 이 statistic가 풍부하다는게 정확히 어떤의미이고 어떤점에서 좋은건지 잘 모르겠습니다.
@@ -134,25 +134,25 @@ w_k=\frac{e^{\lambda_k}}{\Sigma_{z\in\{in,ln,bn\}}e^{\lambda_z}},k\in\{in,ln,bn\
 실험은 주로 다양한 시나리오에서 SN이 좋은 결과를 보인다는것 위주로 진행되었습니다. 원 논문에 상세하게 설명되어있는만큼 이부분은 생략하겠습니다.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/differnentiable%20Learning-to-Normalize%20via%20Swithcable%20Normalization/asset/fig2.png">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master%5Breviewed%5D%20/differnentiable%20Learning-to-Normalize%20via%20Switchable%20Normalization/asset/fig2.png">
 </p>
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/differnentiable%20Learning-to-Normalize%20via%20Swithcable%20Normalization/asset/fig3.png">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/%5Breviewed%5D%20differnentiable%20Learning-to-Normalize%20via%20Switchable%20Normalization/asset/fig3.png">
 </p>
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/differnentiable%20Learning-to-Normalize%20via%20Swithcable%20Normalization/asset/fig6.png">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/%5Breviewed%5D%20differnentiable%20Learning-to-Normalize%20via%20Switchable%20Normalization/asset/fig6.png">
 </p>
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/differnentiable%20Learning-to-Normalize%20via%20Swithcable%20Normalization/asset/fig9.png">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/%5Breviewed%5D%20differnentiable%20Learning-to-Normalize%20via%20Switchable%20Normalization/asset/fig9.png">
 </p>
 
 
 ## 5.implementation
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/differnentiable%20Learning-to-Normalize%20via%20Swithcable%20Normalization/asset/fig7.png">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/%5Breviewed%5D%20differnentiable%20Learning-to-Normalize%20via%20Switchable%20Normalization/asset/fig7.png">
 </p>
 이는 저자분들이 논문에 올려주신 구현인데, 위와같이 연산의 중복성 제거 없이 각각에 대하여 직점 평균과 분산을 구하는 방식으로 되어있습니다.
 
