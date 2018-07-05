@@ -134,7 +134,7 @@ w_k=\frac{e^{\lambda_k}}{\Sigma_{z\in\{in,ln,bn\}}e^{\lambda_z}},k\in\{in,ln,bn\
 실험은 주로 다양한 시나리오에서 SN이 좋은 결과를 보인다는것 위주로 진행되었습니다. 원 논문에 상세하게 설명되어있는만큼 이부분은 생략하겠습니다.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master%5Breviewed%5D%20/differnentiable%20Learning-to-Normalize%20via%20Switchable%20Normalization/asset/fig2.png">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/%5Breviewed%5D%20differnentiable%20Learning-to-Normalize%20via%20Switchable%20Normalization/asset/fig2.png">
 </p>
 
 <p align="center">
