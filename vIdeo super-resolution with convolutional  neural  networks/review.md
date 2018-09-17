@@ -85,7 +85,7 @@ Video SR model을 학습시키기 전에, 먼저 이미지에 대하여 pre-trai
 신경망 구조는 [learning a deep convolutional network for image super-resolution dong et. al.]에 제안된것을 사용한다. 이는 CNN 레이어만을 사용하기 때문에 입력 이미지의 크기에 상관없이 적용가능하며 patch-based algorithm이 아니라는 장점이 있다.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/assets/dong.png" width="300">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/assets/dong.png" width="500">
 </p>
 
 마지막 레이어는 오직 1개 (흑백 이미지의 경우)의 채널 차원만을 가진다. 입력이미지 Y는 bicubic보간법으로 upsampled되어 들어가기 때문에 입력이미지와 출력이미지의 해상도는 같다. 이는 당시에는 일반적인 CNN으로는 upsampling하는것이 불가능하였기 때문이다. 분류문제와는 다르게 SR에서는 maxpooling이나 normalization layer와 같은 압축기법, 또는 계층은 사용하지 않는다. 모델은 이미지넷 데이터셋으로부터 추출된 패치들로 학습되었으며, 이렇게 추출된 데이터셋은 400,000장의 이미지로 구성된다.
@@ -98,6 +98,8 @@ Video SR model을 학습시키기 전에, 먼저 이미지에 대하여 pre-trai
 </p>
 
 
+## Weithgt Transfer From Pretraining
+Figure 1의 reference 모델을 Figure.2의 SR모델에 transfer하기 위해서는 두 모델의 wieght들이 동일해야 한다. 하지만 Fig.2에서는 병합되는 레이어 (a,b,c 에따라 병합레이어의 위치는 다를 수 있지만)에 3배 많은 wieght들이 필요하다. 이를 맞추기 위해서 Fig.1의 refference모델을 학습시킬때 동일한 이미지 세장을 사용하도록하고 구조를 fig.2와 동일하도록 한다. 이는 결과적으로 1장의 이미지를 사용할때와 같으며 구조상으로 SR모델과 동일하게 되는 효과를 얻을 수 있다.
 
 
 
