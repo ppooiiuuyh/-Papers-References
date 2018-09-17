@@ -85,25 +85,17 @@ Video SR model을 학습시키기 전에, 먼저 이미지에 대하여 pre-trai
 신경망 구조는 [learning a deep convolutional network for image super-resolution dong et. al.]에 제안된것을 사용한다. 이는 CNN 레이어만을 사용하기 때문에 입력 이미지의 크기에 상관없이 적용가능하며 patch-based algorithm이 아니라는 장점이 있다.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/assets/dong.png" width="500">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/assets/dong.png" width="300">
 </p>
 
 마지막 레이어는 오직 1개 (흑백 이미지의 경우)의 채널 차원만을 가진다. 입력이미지 Y는 bicubic보간법으로 upsampled되어 들어가기 때문에 입력이미지와 출력이미지의 해상도는 같다. 이는 당시에는 일반적인 CNN으로는 upsampling하는것이 불가능하였기 때문이다. 분류문제와는 다르게 SR에서는 maxpooling이나 normalization layer와 같은 압축기법, 또는 계층은 사용하지 않는다. 모델은 이미지넷 데이터셋으로부터 추출된 패치들로 학습되었으며, 이렇게 추출된 데이터셋은 400,000장의 이미지로 구성된다.
 
 ### B. Video Super-resolution Architectures
-For the video SR architecture, we include the neighbor-
-ing frames into the process. Figure 2 shows three options
-for incorporating the previous and next frames into the pro-
-cess. For simplicity, we only show the architecture for three
-input frames, namely the previous (t − 1), current (t), and next
-(t + 1) frames. Clearly, any number of past and future frames
-can be accomodated (for example, we use five input frames
-in the experimental section). In order to use more than one
-forward- and backward-frame, the architectures in Figure 2
-can be extended with more branches. A single input frame
-has dimensions 1 × M × N , where M and N are the width
-and height of the input image, respectively. For the architec-
-ture in
+비디오 SR을 위해서 목표 프레임에 이웃한 프레임들을 처리 과정에 포함시켰다. Figure 2는 논문에서 고려하는 입력 이미지들의 합병 시점에 따른 세가지 다른 구조를 나타낸다. 실제로는 3장의 이미지가아닌 그 이상의 이미지를 사용하는것도 가능하며 이에 대한 실험도 수행하였다.
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/assets/VSRCNN2.png" width="500">
+</p>
 
 
 
