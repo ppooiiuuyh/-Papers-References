@@ -85,24 +85,26 @@ Video SR model을 학습시키기 전에, 먼저 이미지에 대하여 pre-trai
 신경망 구조는 [learning a deep convolutional network for image super-resolution dong et. al.]에 제안된것을 사용한다. 이는 CNN 레이어만을 사용하기 때문에 입력 이미지의 크기에 상관없이 적용가능하며 patch-based algorithm이 아니라는 장점이 있다.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/%5Breviewed%5D%20domain%20adaptive%20faster%20r-cnn%20for%20object%20detection%20in%20the%20wild/fig1.png" width="300">
+<img src="https://raw.githubusercontent.com/ppooiiuuyh/-Papers-References/master/assets/dong.png" width="500">
 </p>
 
+마지막 레이어는 오직 1개 (흑백 이미지의 경우)의 채널 차원만을 가진다. 입력이미지 Y는 bicubic보간법으로 upsampled되어 들어가기 때문에 입력이미지와 출력이미지의 해상도는 같다. 이는 당시에는 일반적인 CNN으로는 upsampling하는것이 불가능하였기 때문이다. 분류문제와는 다르게 SR에서는 maxpooling이나 normalization layer와 같은 압축기법, 또는 계층은 사용하지 않는다. 모델은 이미지넷 데이터셋으로부터 추출된 패치들로 학습되었으며, 이렇게 추출된 데이터셋은 400,000장의 이미지로 구성된다.
 
-Otherwise an additional layer with one kernel otherwise a postprocessing or
-aggregation step is required. The input image Y is bicubically
-upsampled so that the input (LR) and output (HR) images have
-the same resolution. This is necessary because upsampling with
-standard convolutional layers is not possible. A typical image
-classification architecture often contains pooling and normal-
-ization layers, which helps to create compressed layer outputs
-that are invariant to small shifts and distortions of the input
-image. In the SR task, we are interested in creating more image
-details rather than compressing them. Hence the introduction of
-pooling and normalization layers would be counter productive.
-The model is trained on patches extracted from images from
-the ImageNet detection dataset [38], which consists of around
-400,000 images.
+### B. Video Super-resolution Architectures
+For the video SR architecture, we include the neighbor-
+ing frames into the process. Figure 2 shows three options
+for incorporating the previous and next frames into the pro-
+cess. For simplicity, we only show the architecture for three
+input frames, namely the previous (t − 1), current (t), and next
+(t + 1) frames. Clearly, any number of past and future frames
+can be accomodated (for example, we use five input frames
+in the experimental section). In order to use more than one
+forward- and backward-frame, the architectures in Figure 2
+can be extended with more branches. A single input frame
+has dimensions 1 × M × N , where M and N are the width
+and height of the input image, respectively. For the architec-
+ture in
+
 
 
 
